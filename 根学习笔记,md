@@ -1,10 +1,20 @@
 说明：安装cmder后，就有了bash命令工具。git是bash中的一部分，也是软件。查看git版本的命令：git --version
-markdown基本语法
+## markdown基本语法
 ![示例图片](C:\Users\kwanlan\Desktop\VsCodeWorkingArea\StudyingNotesArea\Markdown基本语法.jpg)
-git 命令：
+## git 命令：
 1. git init    用于初始化（即创建）本地仓库
-2. git add 文件名   用于确认文件可以提交（但还未正式进行提交操作），若要增加当前目录所有文件，使用 git add .
+2. git add 文件名   用于确认文件可以提交，即添加了索引，但还未正式进行提交操作；若要增加当前目录所有文件的索引，使用 git add .
 3. git status    查看仓库当前状态
 4. git commit -m    确认提交，在m后直接输入标题（提交理由），标题要用英文双引号包裹。
 5. git commit -v    确认提交，在文件打开后第一行输入标题（提交理由），然后保存并关闭。    --verbose
-不提交文件的索引：建立文件 .gitignore ，在此文件中记录所有不提交文件的文件名。
+6. git log 查看所有的版本拷贝
+不提交文件的索引：建立文件 .gitignore ，在此文件中记录所有不提交的文件名。
+项目推进：重复 git add 和 git commit -v 即可
+7. git reset --hard XXXXXX    回滚版本。最后为提交号的前6位。危险操作请慎重，请一定确保已经把所有代码commit了，因为此操作会使没有commit过的变动消失。最后参数可以为 master
+8. git reflog    查看所有“御剑飞行”的版本。可在列出的记录中任意飞行。
+9. git branch $    创建新分支 $，仅创建了分支，无其他操作。
+10. git branch    列出所有分支供选择进行切换，通过星号*进行选择
+11. git checkout $    切换到分支 $，切换到主分支使用 git checkout master
+12. history 查看敲入的bash历史命令
+13. git merge    合并分支。[可以参考课件]解决合并冲突小窍门：搜索四个小于号（<<<<）和四个大于号（>>>>），在之间的内容中保留需要的，删除不要的，最后把大于号、小于号、等于号的标记全部删除。
+解决冲突后，首先进行标记。使用 git add 文件名 命令。之后提交，使用 git commit 命令（无后缀参数），git会自动添加标题“Merge branch $”
