@@ -1,0 +1,10 @@
+说明：安装cmder后，就有了bash命令工具。git是bash中的一部分，也是软件。查看git版本的命令：git --version
+markdown基本语法
+![示例图片](C:\Users\kwanlan\Desktop\VsCodeWorkingArea\StudyingNotesArea\Markdown基本语法.jpg)
+git 命令：
+1. git init    用于初始化（即创建）本地仓库
+2. git add 文件名   用于确认文件可以提交（但还未正式进行提交操作），若要增加当前目录所有文件，使用 git add .
+3. git status    查看仓库当前状态
+4. git commit -m    确认提交，在m后直接输入标题（提交理由），标题要用英文双引号包裹。
+5. git commit -v    确认提交，在文件打开后第一行输入标题（提交理由），然后保存并关闭。    --verbose
+不提交文件的索引：建立文件 .gitignore ，在此文件中记录所有不提交文件的文件名。
