@@ -1,6 +1,56 @@
-说明：安装cmder后，就有了bash命令工具。git是bash中的一部分，也是软件。查看git版本的命令：git --version
+# 翻墙方法
+具体查看GitHub的星。
+# Chrome使用技巧
+* 在翻墙全局代理下，搜索并安装，防止安装到国内流氓版
+* （可选）设置默认浏览器
+
+# Cmder的设置（settings）
+* 通用：Interface Language ===> 简体中文 ；勾选：单实例、Quake、Support_special_hotkeys
+* 通用===>字体：在27寸屏幕下调整为24号
+* 通用===>大小&位置===>窗口大小：选正常，宽高均设置为90%。
+* 通用===>Quake风格：勾选自动隐藏、始终置顶。
+* 启动：指定任务名称为{bash::bash}
+* 启动===>任务：在命令组内选择第8个{bash::bash}，右下方可以设置启动目录。
+* 如有设置bug：将ConEum.xml中的language参数改为zh。
+
+# VsCode的设置
+1. 汉化：搜索Chinese，安装汉化插件并重启软件；
+2. F1或Ctrl+Shift+P，呼出搜索框，可选配置：
+* 自动保存 Auto Save: onFocusChange
+* 自动格式化 Format On Save 
+* 面板靠右
+* 字体设为  Fira Code, Consolas, 'Courier New', monospace 并调整字号
+* 启用字体连字，将鼠标悬浮至 Editor: Font Ligatures，看到一个小齿轮图标，点击图标，选择最后的选项，点击之后会自动复制一个配置，将之粘贴至settings.json，并将参数改为true。
+3. 使VsCode和Cmder联合：向settings.json添加以下内容：
+"git.enabled": true,
+"git.path": "D:\\04_Developing_Program\\Cmder\\vendor\\git-for-windows\\cmd\\git.exe",
+"terminal.integrated.shell.windows": "D:\\04_Developing_Program\\Cmder\\vendor\\git-for-windows\\bin\\bash.exe",
+
+# 安装Node.js（--version）
+注意安装路径中不能有空格
+安装之后，自然就有了 node 命令（因为 PATH），自然就有了 npm 命令，自然就有了 npx 命令
+使用淘宝源（不要用 cnpm）：npm i -g nrm ===> nrm ls ===> nrm use taobao
+安装httpserver：npm i -g http-server
+查看httpserver版本：http-server --version
+查看httpserver安装路径： which http-server
+http-server 可缩写为 hs
+
+# 安装yarn（--version）（yarn config list）
+如果你已经使用 npm install -g yarn 安装了 yarn，那么请使用 npm uninstall -g yarn 卸载 yarn。然后按照 yarn 官网的教程来安装 yarn（不要信百度，要信官网）。
+yarn 2.0 推荐用 npm 安装，但是目前 yarn 并不流行。所以目前不需要安装 yarn 2.0。
+推荐装到没有空格的目录，去官网下载，不要使用 npm i -g yarn，nrm 的淘宝源改动会自动作用到 yarn 上
+查看yarn配置： yarn config list ，注意查看 registry项
+获取yarn的registry： yarn config get registry
+如果registry项不为taobao，则安装yarn的源管理器：yarn global add yrm
+列出安装镜像地址：yrm ls ，看是否为taobao，若是则配置完成。
+若不是，运行： yrm use taobao 
+因为npm已安装，所以此步骤可省略：yarn global add http-server
+
 ## markdown基本语法
 ![示例图片](C:\Users\kwanlan\Desktop\VsCodeWorkingArea\StudyingNotesArea\Markdown基本语法.jpg)
+
+说明：安装cmder后，就有了bash命令工具。git是bash中的一部分，也是软件。查看git版本的命令：git --version
+
 ## git 命令：
 1. git init    用于初始化（即创建）本地仓库
 2. git add 文件名   用于确认文件可以提交，即添加了索引，但还未正式进行提交操作；若要增加当前目录所有文件的索引，使用 git add .
@@ -18,13 +68,24 @@
 12. history 查看敲入的bash历史命令
 13. git merge    合并分支。[可以参考课件]解决合并冲突小窍门：搜索四个小于号（<<<<）和四个大于号（>>>>），在之间的内容中保留需要的，删除不要的，最后把大于号、小于号、等于号的标记全部删除。
 解决冲突后，首先进行标记。使用 git add 文件名 命令。之后提交，使用 git commit 命令（无后缀参数），git会自动添加标题“Merge branch $”
+
+## git 六行配置
+git config --global user.name 你的英文名
+git config --global user.email 你的邮箱
+git config --global push.default simple
+git config --global core.quotepath false
+git config --global core.editor "code --wait"
+git config --global core.autocrlf input
 ## git远程配置命令
 ssh-keygen -t rsa -b 4096 -C 你的邮箱
-cat ~/.ssh/id_rsa.pub                           # 得到公钥内容
-ssh -T git@github.com # 验证是否连接成功
+然后打开github，进入settings，选择ssh_key，新增一个。
+得到公钥内容：cat ~/.ssh/id_rsa.pub ，再粘贴到github中。
+验证是否连接成功：ssh -T git@github.com
+初始化远程仓库：可以参照在github上新建仓库时给出的参考命令。
 git remote add origin git@xxxxxxx
 git push -u origin master
-## git配置简化命令，通过 .bashrc 文件配置
+
+## git配置简化命令，通过 .bashrc 文件配置，放置在C:\Users\asmov 下。
 touch ~/.bashrc
 echo 'alias ga="git add"'>> ~/.bashrc
 echo 'alias gc="git commit -v"'>> ~/.bashrc
@@ -34,3 +95,4 @@ echo 'alias gco="git checkout"'>> ~/.bashrc
 echo 'alias gst="git status -sb"'>> ~/.bashrc
 最后加上 alias glog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit -- | less"
 小技巧：ctrl + w 可以快速关闭退出vscode中已保存的文件。
+如果cmder里不能使用code命令打开文件，则要修改环境变量，把 ~\AppData\Local\Pragrams\Microsoft VS Code\Bin 加入环境变量。
